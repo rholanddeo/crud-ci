@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Stock;
 use App\Models\Barang;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -12,9 +13,12 @@ class BarangController extends BaseController
     {
         $barangModel = new Barang();
         // $pager = \Config\Services::pager();
+        $barangData = $barangModel->select('tbl_barang.*, tbl_stock.qtybeli')
+                             ->join('tbl_stock', 'tbl_stock.kodebrg = tbl_barang.kodebrg', 'left')
+                             ->paginate(10);
 
         $data = [
-            'barang' => $barangModel->paginate(10),
+            'barang' => $barangData,
             'pager' => $barangModel->pager,
         ];
 
@@ -166,6 +170,11 @@ class BarangController extends BaseController
         public function delete($id)
         {
             $barangModel = new Barang();
+            $stockModel = new Stock();
+
+            $barang = $barangModel->find($id);
+            
+            $stockModel->where('kodebrg', $barang['kodebrg'])->delete();
             $barangModel->delete($id);
 
             //flash message

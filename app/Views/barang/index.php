@@ -64,27 +64,35 @@
           <th>NAMA BARANG</th>
           <th>SATUAN</th>
           <th>HARGA BELI</th>
+          <th>STOK</th>
           <th>AKSI</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($barang as $key => $item) : ?>
-  
+
           <tr>
             <td><?php echo $item['kodebrg'] ?></td>
             <td><?php echo $item['namabrg'] ?></td>
             <td><?php echo $item['satuan'] ?></td>
             <td><?php echo $item['hargabeli'] ?></td>
+            <td>
+              <?php if (isset($item['qtybeli'])) : ?>
+                <?php echo $item['qtybeli'] ?>
+              <?php else : ?>
+                0
+              <?php endif ?>
+            </td>
             <td class="d-flex flex-wrap gap-2">
               <a href="<?php echo base_url('barang-edit-' . $item['id']) ?>" class="btn btn-sm btn-warning w-100 w-sm-auto">
                 <i class="bi-pencil mr-1"></i> EDIT
-            </a>
+              </a>
               <a href="<?php echo base_url('barang/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger w-100 w-sm-auto">
                 <i class="bi-trash mr-1"></i> DELETE
-            </a>
+              </a>
             </td>
           </tr>
-  
+
         <?php endforeach ?>
       </tbody>
     </table>

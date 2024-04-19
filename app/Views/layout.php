@@ -207,7 +207,7 @@
     <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-container navbar-bordered bg-white">
         <div class="navbar-nav-wrap">
             <!-- Logo -->
-            <a class="navbar-brand" href="./index.html" aria-label="Front">
+            <a class="navbar-brand" href="#" aria-label="Front">
                 <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
                 <img class="navbar-brand-logo" src="./assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
                 <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
@@ -278,10 +278,10 @@
                                 <span class="dropdown-header">Recent searches</span>
 
                                 <div class="dropdown-item bg-transparent text-wrap">
-                                    <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.html">
+                                    <a class="btn btn-soft-dark btn-xs rounded-pill" href="#">
                                         Gulp <i class="bi-search ms-1"></i>
                                     </a>
-                                    <a class="btn btn-soft-dark btn-xs rounded-pill" href="./index.html">
+                                    <a class="btn btn-soft-dark btn-xs rounded-pill" href="#">
                                         Notification panel <i class="bi-search ms-1"></i>
                                     </a>
                                 </div>
@@ -290,7 +290,7 @@
 
                                 <span class="dropdown-header">Tutorials</span>
 
-                                <a class="dropdown-item" href="./index.html">
+                                <a class="dropdown-item" href="#">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <span class="icon icon-soft-dark icon-xs icon-circle">
@@ -304,7 +304,7 @@
                                     </div>
                                 </a>
 
-                                <a class="dropdown-item" href="./index.html">
+                                <a class="dropdown-item" href="#">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <span class="icon icon-soft-dark icon-xs icon-circle">
@@ -322,7 +322,7 @@
 
                                 <span class="dropdown-header">Members</span>
 
-                                <a class="dropdown-item" href="./index.html">
+                                <a class="dropdown-item" href="#">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <img class="avatar avatar-xs avatar-circle" src="./assets/img/160x160/img10.jpg" alt="Image Description">
@@ -333,7 +333,7 @@
                                     </div>
                                 </a>
 
-                                <a class="dropdown-item" href="./index.html">
+                                <a class="dropdown-item" href="#">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <img class="avatar avatar-xs avatar-circle" src="./assets/img/160x160/img3.jpg" alt="Image Description">
@@ -344,7 +344,7 @@
                                     </div>
                                 </a>
 
-                                <a class="dropdown-item" href="./index.html">
+                                <a class="dropdown-item" href="#">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0">
                                             <div class="avatar avatar-xs avatar-soft-info avatar-circle">
@@ -360,7 +360,7 @@
                             <!-- End Body -->
 
                             <!-- Footer -->
-                            <a class="card-footer text-center" href="./index.html">
+                            <a class="card-footer text-center" href="#">
                                 See all results <i class="bi-chevron-right small"></i>
                             </a>
                             <!-- End Footer -->
@@ -380,11 +380,29 @@
 
 
                     <li class="nav-item d-none d-sm-inline-block">
-                        <!-- Activity -->
-                        <button class="btn btn-ghost-secondary btn-icon rounded-circle" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasActivityStream" aria-controls="offcanvasActivityStream">
-                            <i class="bi-x-diamond"></i>
-                        </button>
-                        <!-- Activity -->
+                        <!-- Style Switcher -->
+                        <div class="dropdown ">
+                            <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-end navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
+                                <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
+                                    <i class="bi-moon-stars me-2"></i>
+                                    <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
+                                </a>
+                                <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
+                                    <i class="bi-brightness-high me-2"></i>
+                                    <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
+                                </a>
+                                <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
+                                    <i class="bi-moon me-2"></i>
+                                    <span class="text-truncate" title="Dark">Dark</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- End Style Switcher -->
                     </li>
 
                     <li class="nav-item">
@@ -418,7 +436,7 @@
 
                                 <div class="dropdown-divider"></div>
 
-                                <a class="dropdown-item" href="#">Sign out</a>
+                                <a class="dropdown-item" href="./">Sign out</a>
                             </div>
                         </div>
                         <!-- End Account -->
@@ -439,7 +457,7 @@
             <div class="navbar-vertical-footer-offset">
                 <!-- Logo -->
 
-                <a class="navbar-brand" href="./index.html" aria-label="Front">
+                <a class="navbar-brand" href="#" aria-label="Front">
                     <img class="navbar-brand-logo" src="./assets/svg/logos/logo.svg" alt="Logo" data-hs-theme-appearance="default">
                     <img class="navbar-brand-logo" src="./assets/svg/logos-light/logo.svg" alt="Logo" data-hs-theme-appearance="dark">
                     <img class="navbar-brand-logo-mini" src="./assets/svg/logos/logo-short.svg" alt="Logo" data-hs-theme-appearance="default">
@@ -459,53 +477,55 @@
                 <!-- Content -->
                 <div class="navbar-vertical-content">
                     <div id="navbarVerticalMenu" class="nav nav-pills nav-vertical card-navbar-nav">
-                        <!-- Collapse -->
-                        <div class="nav-item">
-                            <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards" aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
-                                <i class="bi-house-door nav-icon"></i>
-                                <span class="nav-link-title">Dashboards</span>
-                            </a>
 
-                            <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse " data-bs-parent="#navbarVerticalMenu">
-                                <a class="nav-link active" href="./index.html">Default</a>
-                                <a class="nav-link " href="./dashboard-alternative.html">Alternative</a>
-                            </div>
-                        </div>
-                        <!-- End Collapse -->
 
-                        <span class="dropdown-header mt-4">Pages</span>
+                        <span class="dropdown-header">Pages</span>
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                         <div class="nav-item">
-                            <a class="nav-link <?php if (current_url(true)->getPath() === '/barang') echo 'active'; ?>" data-placement="left" href="<?php echo base_url('barang') ?>">
+                            <a class="nav-link <?php if (strpos(current_url(), 'barang') !== false) echo 'active'; ?>" data-placement="left" href="<?php echo base_url('barang') ?>">
                                 <i class=" bi-kanban nav-icon"></i>
                                 <span class="nav-link-title">
-                                   Barang
+                                    Barang
                                 </span>
                             </a>
                         </div>
-                            
+
 
                         <div class="nav-item">
-                            <a class="nav-link <?php if (current_url(true)->getPath() === '/suplier') echo 'active'; ?>" data-placement="left" href="<?php echo base_url('suplier') ?>">
+                            <a class="nav-link <?php if (strpos(current_url(), 'suplier') !== false) echo 'active'; ?>" data-placement="left" href="<?php echo base_url('suplier') ?>">
                                 <i class="bi-calendar-week nav-icon"></i>
                                 <span class="nav-link-title">Suplier</span>
                             </a>
                         </div>
 
+                        <!-- Collapse -->
                         <div class="nav-item">
-                            <a class="nav-link " href="./apps-invoice-generator.html" data-placement="left">
-                                <i class="bi-receipt nav-icon"></i>
+                            <a class="nav-link dropdown-toggle <?php if (strpos(current_url(), 'transaksi') !== false) echo 'active'; ?>" href="#navbarVerticalMenuDashboards" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards" aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
+                                <i class="bi-house-door nav-icon"></i>
                                 <span class="nav-link-title">Pembelian</span>
                             </a>
+
+                            <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse <?php if (strpos(current_url(), 'transaksi') !== false) echo 'show'; ?>" data-bs-parent="#navbarVerticalMenu">
+                                <a class="nav-link <?php if (strpos(current_url(), 'transaksi') !== false) echo 'active'; ?>" href="<?php echo base_url('transaksi') ?>">Transaksi</a>
+                                <a class="nav-link <?php if (strpos(current_url(), 'transaksi') !== false) echo 'active'; ?>" href="<?php echo base_url('transaksi') ?>">Hutang</a>
+                            </div>
                         </div>
 
-                        <div class="nav-item">
-                            <a class="nav-link " href="./apps-file-manager.html" data-placement="left">
-                                <i class="bi-folder2-open nav-icon"></i>
-                                <span class="nav-link-title">File Manager</span>
-                            </a>
-                        </div>
+                        <!-- <div class="nav-item">
+              <a class="nav-link dropdown-toggle active" href="#navbarVerticalMenuDashboards" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards" aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
+                <i class="bi-house-door nav-icon"></i>
+                <span class="nav-link-title">Dashboards</span>
+              </a>
+
+              <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse show" data-bs-parent="#navbarVerticalMenu">
+                <a class="nav-link active" href="#">Default</a>
+                <a class="nav-link " href="#">Alternative</a>
+              </div>
+            </div> -->
+                        <!-- End Collapse -->
+
+
 
 
                     </div>
@@ -513,37 +533,7 @@
                 </div>
                 <!-- End Content -->
 
-                <!-- Footer -->
-                <div class="navbar-vertical-footer">
-                    <ul class="navbar-vertical-footer-list">
-                        <li class="navbar-vertical-footer-list-item">
-                            <!-- Style Switcher -->
-                            <div class="dropdown dropup">
-                                <button type="button" class="btn btn-ghost-secondary btn-icon rounded-circle" id="selectThemeDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
 
-                                </button>
-
-                                <div class="dropdown-menu navbar-dropdown-menu navbar-dropdown-menu-borderless" aria-labelledby="selectThemeDropdown">
-                                    <a class="dropdown-item" href="#" data-icon="bi-moon-stars" data-value="auto">
-                                        <i class="bi-moon-stars me-2"></i>
-                                        <span class="text-truncate" title="Auto (system default)">Auto (system default)</span>
-                                    </a>
-                                    <a class="dropdown-item" href="#" data-icon="bi-brightness-high" data-value="default">
-                                        <i class="bi-brightness-high me-2"></i>
-                                        <span class="text-truncate" title="Default (light mode)">Default (light mode)</span>
-                                    </a>
-                                    <a class="dropdown-item active" href="#" data-icon="bi-moon" data-value="dark">
-                                        <i class="bi-moon me-2"></i>
-                                        <span class="text-truncate" title="Dark">Dark</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- End Style Switcher -->
-                        </li>
-                    </ul>
-                </div>
-                <!-- End Footer -->
             </div>
         </div>
     </aside>

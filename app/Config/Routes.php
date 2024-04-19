@@ -7,7 +7,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', [Home::class, 'index']);
+
+$routes->get('/', function ()
+{
+    return view('login');
+});
+
+
 $routes->get('/barang', [BarangController::class, 'index']);
 $routes->get('/barang-create',  'BarangController::create');
 $routes->post('/barang/store', 'BarangController::store');
@@ -21,3 +27,7 @@ $routes->post('/suplier/store', 'SuplierController::store');
 $routes->get('/suplier-edit-(:num)', 'SuplierController::edit/$1');
 $routes->post('/suplier/update/(:num)', 'SuplierController::update/$1');
 $routes->get('/suplier/delete/(:num)', 'SuplierController::delete/$1');
+
+$routes->get('/transaksi', 'TransaksiController::index');
+$routes->get('/transaksi-create', 'TransaksiController::create');
+$routes->post('/transaksi/store', 'TransaksiController::store');

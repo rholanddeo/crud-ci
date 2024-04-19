@@ -20,8 +20,8 @@ class Hutang extends Migration
                 'constraint'     => '10',
             ],
             'kodespl'       => [
-                'type'           => 'INT',
-                'constraint'     => 11,
+                'type'           => 'CHAR',
+                'constraint'     => '10',
             ],
             'tglbeli'       => [
                 'type'           => 'DATE',

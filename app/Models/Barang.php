@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use CodeIgniter\Model;
+use CodeIgniter\Database\ConnectionInterface;
 
 class Barang extends Model
 {
@@ -16,5 +18,17 @@ class Barang extends Model
         'hargabeli',
         // 'gambar',
     ];
+
+    // get stock
+    public function getStock()
+    {
+        return $this->stock()->findAll();
+    }
+
+    // relationship
+    public function stock()
+    {
+        return $this->hasOne('App\Models\Stock', 'kodebrg');
+    }
 
 }

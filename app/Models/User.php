@@ -4,18 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Stock extends Model
+class User extends Model
 {
-    protected $table            = 'tbl_stock';
+    protected $table            = 'users';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [
-        'kodebrg',
-        'qtybeli',
-    ];
+    protected $allowedFields    = [];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -46,14 +43,4 @@ class Stock extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    // relationships
-
-    public function barang()
-    {
-        return $this->belongsToOne(Barang::class, 'kodebrg', 'kodebrg');
-    }
-    
-
-
 }

@@ -43,6 +43,11 @@ class DetailBeli extends Migration
                 'type'           => 'INT',
                 'constraint'     => 11,
             ],
+            'islunas'       => [
+                'type'           => 'ENUM',
+                'constraint'     => ['Y', 'N'],
+                'default'        => 'N',
+            ],
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('tbl_dbeli');

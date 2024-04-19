@@ -20,6 +20,7 @@ class DetailBeli extends Model
         'diskon',
         'diskonrp',
         'totalrp',
+        'islunas',
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -51,4 +52,26 @@ class DetailBeli extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // Relationships
+
+    public function headerBeli()
+    {
+        return $this->belongsTo(HeaderBeli::class, 'notransaksi', 'notransaksi');
+    }
+
+    public function barang()
+    {
+        return $this->belongsTo(Barang::class, 'kodebrg', 'kodebrg');
+    }
+
+    // Custom Methods
+    
+            // menghitung totalrp pada detail beli yang memiliki notransaksi yang sama
+    // public function getTotalRpByNotransaksi(string $notransaksi)
+    // {
+    //     return $this->where('notransaksi', $notransaksi)->selectSum('totalrp')->first();
+    // }
+
+
 }
