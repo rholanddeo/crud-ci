@@ -104,7 +104,7 @@ class TransaksiController extends BaseController
 
 
             //flash message
-            session()->setFlashdata('message', 'Data Barang Berhasil Disimpan');
+            session()->setFlashdata('message', 'Data Transaksi Berhasil Disimpan');
 
             return redirect()->to(base_url('transaksi-detail-' . $headerBeliModel->insertID()));
         }
@@ -175,7 +175,7 @@ class TransaksiController extends BaseController
             ]);
 
             //flash message
-            session()->setFlashdata('message', 'Data Barang Berhasil Diubah');
+            session()->setFlashdata('message', 'Data Transaksi Berhasil Diubah');
 
             return redirect()->to(base_url('transaksi'));
         }
@@ -187,7 +187,7 @@ class TransaksiController extends BaseController
         $headerBeliModel->delete($id);
 
         //flash message
-        session()->setFlashdata('message', 'Data Barang Berhasil Dihapus');
+        session()->setFlashdata('message', 'Data Transaksi Berhasil Dihapus');
 
         return redirect()->to(base_url('transaksi'));
     }
@@ -314,7 +314,7 @@ class TransaksiController extends BaseController
 
 
             //flash message
-            session()->setFlashdata('message', 'Data Barang Berhasil Disimpan');
+            session()->setFlashdata('message', 'Detail Transaksi Berhasil Ditambahkan');
 
             return redirect()->to(base_url('transaksi-detail-' . $id));
         }
@@ -329,7 +329,7 @@ class TransaksiController extends BaseController
         $detailBeliModel->delete($id);
 
         //flash message
-        session()->setFlashdata('message', 'Data Barang Berhasil Dihapus');
+        session()->setFlashdata('message', 'Detail Transaksi Berhasil Dihapus');
 
         return redirect()->to(base_url('transaksi-detail-' . $headerBeli['id']));
     }
