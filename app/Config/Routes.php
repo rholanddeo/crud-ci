@@ -31,5 +31,9 @@ $routes->get('/suplier/delete/(:num)', 'SuplierController::delete/$1');
 $routes->get('/transaksi', 'TransaksiController::index');
 $routes->get('/transaksi-create', 'TransaksiController::create');
 $routes->post('/transaksi-store', 'TransaksiController::store');
+$routes->get('/transaksi-edit-(:num)', 'TransaksiController::edit/$1');
+$routes->post('/transaksi-update/(:num)', 'TransaksiController::update/$1');
+$routes->get('/transaksi-delete/(:num)', 'TransaksiController::delete/$1');
+$routes->get('/transaksi-detail-(:num)', 'TransaksiController::detail/$1');
 
 $routes->get('/hutang', 'TransaksiController::hutang');
