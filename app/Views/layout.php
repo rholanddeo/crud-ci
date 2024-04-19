@@ -616,21 +616,28 @@
 
     <!-- JS Plugins Init. -->
     <script>
-  (function() {
-    // INITIALIZATION OF STEP FORM
-    // =======================================================
-    new HSStepForm('.js-step-form', {
-      finish ($el) {
-        const $successMessageTempalte = $el.querySelector('.js-success-message').cloneNode(true)
+        (function() {
+            // INITIALIZATION OF DATATABLES
+            // =======================================================
+            HSCore.components.HSDatatables.init('.js-datatable')
+        })()
+    </script>
+    <script>
+        (function() {
+            // INITIALIZATION OF STEP FORM
+            // =======================================================
+            new HSStepForm('.js-step-form', {
+                finish($el) {
+                    const $successMessageTempalte = $el.querySelector('.js-success-message').cloneNode(true)
 
-        $successMessageTempalte.style.display = 'block'
+                    $successMessageTempalte.style.display = 'block'
 
-        $el.style.display = 'none'
-        $el.parentElement.appendChild($successMessageTempalte)
-      }
-    })
-  })();
-</script>
+                    $el.style.display = 'none'
+                    $el.parentElement.appendChild($successMessageTempalte)
+                }
+            })
+        })();
+    </script>
     <script>
         (function() {
             // INITIALIZATION OF SELECT
@@ -639,12 +646,12 @@
         })();
     </script>
     <script>
-  (function() {
-    // INITIALIZATION OF FLATPICKR
-    // =======================================================
-    HSCore.components.HSFlatpickr.init('.js-flatpickr')
-  })();
-</script>
+        (function() {
+            // INITIALIZATION OF FLATPICKR
+            // =======================================================
+            HSCore.components.HSFlatpickr.init('.js-flatpickr')
+        })();
+    </script>
     <script>
         $(document).on('ready', function() {
             // INITIALIZATION OF DATERANGEPICKER

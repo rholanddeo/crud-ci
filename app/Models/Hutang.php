@@ -17,6 +17,7 @@ class Hutang extends Model
         'kodespl',
         'tglbeli',
         'totalhutang',
+        'islunas',
     ];
 
     protected bool $allowEmptyInserts = false;
@@ -26,7 +27,7 @@ class Hutang extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\Stock;
+use App\Models\Barang;
 use App\Models\Hutang;
 use App\Models\Suplier;
 use App\Models\DetailBeli;
@@ -102,7 +104,7 @@ class TransaksiController extends BaseController
             //flash message
             session()->setFlashdata('message', 'Data Barang Berhasil Disimpan');
 
-            return redirect()->to(base_url('transaksi-detail-' . $notransaksi));
+            return redirect()->to(base_url('transaksi-detail-' . $headerBeliModel->insertID()));
         }
     }
 
@@ -115,8 +117,6 @@ class TransaksiController extends BaseController
             'transaksi' => $headerBeliModel->find($id),
             'suplier' => $suplierModel->findAll(),
         ];
-
-        // dd($data['transaksi']);
 
         return view('transaksi/hbeli', $data);
     }
@@ -194,20 +194,36 @@ class TransaksiController extends BaseController
     public function detail($id)
     {
         $headerBeliModel = new HeaderBeli();
+        $headerBeli = $headerBeliModel->find($id);
         $detailBeliModel = new DetailBeli();
         $suplierModel = new Suplier();
+        $hutangModel = new Hutang();
+        $barangModel = new Barang();
 
         $data = [
             'transaksi' => $headerBeliModel->find($id),
-            'detail' => $detailBeliModel->where('notransaksi', $id)->findAll(),
+            'detail' => $detailBeliModel->where('notransaksi', $headerBeli['notransaksi'])->findAll(),
             'suplier' => $suplierModel->findAll(),
+            'hutang' => $hutangModel->where('notransaksi', $headerBeli['notransaksi'])->first(),
+            'barang' => $barangModel->findAll(),
         ];
+
+        //dd($data['barang']);
+
 
         return view('transaksi/detail', $data);
     }
 
-    public function detailStore($id)
+    public function storeDetail($id)
     {
+        $headerBeliModel = new HeaderBeli();
+        $headerBeli = $headerBeliModel->find($id);
+        $suplierModel = new Suplier();
+        $barangModel = new Barang();
+        $detailBeliModel = new DetailBeli();
+        $barang = $barangModel->where('kodebrg', $this->request->getPost('kodebrg'))->first();
+
+
         //load helper form and URL
         helper(['form', 'url']);
 
@@ -225,38 +241,118 @@ class TransaksiController extends BaseController
                     'required' => 'Masukkan Jumlah Barang.'
                 ]
             ],
-            'hargabeli'    => [
-                'rules'  => 'required',
-                'errors' => [
-                    'required' => 'Masukkan Harga Beli.'
-                ]
-            ],
         ]);
+
 
         if (!$validation) {
 
             //render view with error validation message
             return view('transaksi/detail', [
                 'validation' => $this->validator,
-                'transaksi' => $id,
+                'transaksi' => $headerBeli,
+                'suplier' => $suplierModel->findAll(),
+                'barang' => $barangModel->findAll(),
+                'detail' => $detailBeliModel->where('notransaksi', $headerBeli['notransaksi'])->findAll()
             ]);
         } else {
 
             //model initialize
             $detailBeliModel = new DetailBeli();
 
+            $totalrp = $this->request->getPost('qty') * $barang['hargabeli'];
+            $diskonrp = $this->request->getPost('diskon') * $totalrp / 100;
+
             // Simpan data ke dalam database
             $detailBeliModel->save([
-                'notransaksi' => $id,
+                'notransaksi' => $headerBeli['notransaksi'],
                 'kodebrg' => $this->request->getPost('kodebrg'),
+                'hargabeli' => $barang['hargabeli'],
                 'qty' => $this->request->getPost('qty'),
-                'hargabeli' => $this->request->getPost('hargabeli'),
+                'diskon' => $this->request->getPost('diskon'),
+                'diskonrp' => $diskonrp,
+                'totalrp' => $totalrp,
             ]);
+
+            //menambahkan stok barang
+            $stockModel = new Stock();
+            $existingStock = $stockModel->where('kodebrg', $this->request->getPost('kodebrg'))->first();
+
+            if (!$existingStock) {
+                $stockModel->save([
+                    'kodebrg' => $this->request->getPost('kodebrg'),
+                    'qtybeli' => $this->request->getPost('qty'),
+                ]);
+            } else {
+                $stockModel->save([
+                    'id' => $existingStock['id'],
+                    'kodebrg' => $this->request->getPost('kodebrg'),
+                    'qtybeli' => $existingStock['qtybeli'] + $this->request->getPost('qty'),
+                ]);
+            }
+            
+            //menambahkan hutang
+            $hutangModel = new Hutang();
+            $existingHutang = $hutangModel->where('notransaksi', $headerBeli['notransaksi'])->first();
+
+            if (!$existingHutang) {
+                $hutangModel->save([
+                    'notransaksi' => $headerBeli['notransaksi'],
+                    'kodespl' => $headerBeli['kodespl'],
+                    'tglbeli' => $headerBeli['tglbeli'],
+                    'totalhutang' => $totalrp,
+                ]);
+            } else {
+                $hutangModel->save([
+                    'id' => $existingHutang['id'],
+                    'notransaksi' => $headerBeli['notransaksi'],
+                    'kodespl' => $headerBeli['kodespl'],
+                    'totalhutang' => $existingHutang['totalhutang'] + $totalrp,
+                ]);
+            }
+
 
             //flash message
             session()->setFlashdata('message', 'Data Barang Berhasil Disimpan');
 
             return redirect()->to(base_url('transaksi-detail-' . $id));
         }
+    }
+
+    public function deleteDetail($id)
+    {
+        $detailBeliModel = new DetailBeli();
+        $detailBeli = $detailBeliModel->find($id);
+        $headerBeliModel = new HeaderBeli();
+        $headerBeli = $headerBeliModel->where('notransaksi', $detailBeli['notransaksi'])->first();
+        $detailBeliModel->delete($id);
+
+        //flash message
+        session()->setFlashdata('message', 'Data Barang Berhasil Dihapus');
+
+        return redirect()->to(base_url('transaksi-detail-' . $headerBeli['id']));
+    }
+
+    public function islunasswitch($id)
+    {
+        $hutangModel = new Hutang();
+        $hutang = $hutangModel->find($id);
+        $headerBeliModel = new HeaderBeli();
+        $headerBeli = $headerBeliModel->where('notransaksi', $hutang['notransaksi'])->first();
+
+        $hutang['islunas'] = $this->request->getPost('islunas');
+ 
+        if ($hutang['islunas'] == 0) {
+            $hutangModel->save([
+                'id' => $id,
+                'islunas' => 1,
+            ]);
+        } else {
+            $hutangModel->save([
+                'id' => $id,
+                'islunas' => 0,
+            ]);
+        }
+
+        return redirect()->to(base_url('transaksi-detail-' . $headerBeli['id']));
     }
 }

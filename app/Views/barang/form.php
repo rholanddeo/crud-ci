@@ -29,7 +29,7 @@
     <?php } ?>
     <div class="card">
         <div class="card-body">
-            <form action="<?= isset($barang) ? base_url('barang/update/' . $barang['id']) : base_url('barang/store'); ?>" method="POST">
+            <form action="<?= isset($barang) ? base_url('barang-update-' . $barang['id']) : base_url('barang-store'); ?>" method="POST">
                 <div class="form-group mb-3">
                     <label class="form-label fw-semibold">KODE BARANG</label>
                     <input type="text" class="form-control" name="kodebrg" value="<?= isset($barang) ? $barang['kodebrg'] : ''; ?>" placeholder="Masukkan Kode">

@@ -15,11 +15,10 @@ class BarangController extends BaseController
         
         $barangData = $barangModel->select('tbl_barang.*, tbl_stock.qtybeli')
                              ->join('tbl_stock', 'tbl_stock.kodebrg = tbl_barang.kodebrg', 'left')
-                             ->findAll();
+                             ->orderBy('created_at', 'DESC')->findAll();
 
         $data = [
             'barang' => $barangData,
-            'pager' => $barangModel->pager,
         ];
 
         return view('barang/index', $data);

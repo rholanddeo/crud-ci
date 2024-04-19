@@ -29,7 +29,7 @@
     <?php } ?>
     <div class="card">
         <div class="card-body">
-            <form action="<?= isset($suplier) ? base_url('suplier/update/' . $suplier['id']) : base_url('suplier/store'); ?>" method="POST">
+            <form action="<?= isset($suplier) ? base_url('suplier-update-' . $suplier['id']) : base_url('suplier-store'); ?>" method="POST">
                 <div class="form-group mb-3">
                     <label class="form-label fw-semibold">KODE SUPLIER</label>
                     <input type="text" class="form-control" name="kodespl" value="<?= isset($suplier) ? $suplier['kodespl'] : ''; ?>" placeholder="Masukkan Kode">

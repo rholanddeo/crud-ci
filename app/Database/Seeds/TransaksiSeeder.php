@@ -16,20 +16,29 @@ class TransaksiSeeder extends Seeder
     {
         $suplierModel = new Suplier();
         $allKodespl = $suplierModel->findAll();
+        $headerBeliModel = new HeaderBeli();
+        $countHeaderBeli = $headerBeliModel->countAll();
 
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= 10; $i++) {
 
             $randomIndex = rand(0, count($allKodespl) - 1);
             $kodespl = $allKodespl[$randomIndex]['kodespl'];
+            $notransaksi = 'B' . date('Ym') . $countHeaderBeli++;
 
-            $data = [
-                'notransaksi' => 'B' . date('Ymd') . $i,
-                'tglbeli'    => date('Y-m-d'),
-                'kodespl'    => $kodespl,
-            ];
+            //memeriksa apakah ada notransaksi yang sama
+            $existingHeaderBeli = $headerBeliModel->where('notransaksi', $notransaksi)->first();
+            if (!$existingHeaderBeli) {
+                $data = [
+                    'notransaksi' => $notransaksi,
+                    'tglbeli'    => date('Y-m-d'),
+                    'kodespl'    => $kodespl,
+                ];
+    
+                // Using Query Builder
+                $this->db->table('tbl_hbeli')->insert($data);
+            }
 
-            // Using Query Builder
-            $this->db->table('tbl_hbeli')->insert($data);
+            
         }
 
         $barangModel = new Barang();
@@ -38,7 +47,7 @@ class TransaksiSeeder extends Seeder
         $allKodebrg = $barangModel->findAll();
         $allNotransaksi = $headerBeliModel->findAll();
 
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
             $randomKodebrg = rand(0, count($allKodebrg) - 1);
             $kodebrg = $allKodebrg[$randomKodebrg]['kodebrg'];
 
@@ -57,7 +66,6 @@ class TransaksiSeeder extends Seeder
                 'diskon'      => $diskon,
                 'diskonrp'    => $diskon * $hargabeli / 100,
                 'totalrp'     => $qty * $hargabeli,
-                'islunas'     => rand(0, 1) ? 'Y' : 'N',
             ];
 
             // Using Query Builder
@@ -87,17 +95,19 @@ class TransaksiSeeder extends Seeder
 
                 if (!$existingHutang) {
                     // Pastikan detail beli ada sebelum menghitung total
-                    $detailBeli = $detailBeliModel->where('notransaksi', $notransaksi)->where('islunas', 'N')->first();
+                    $detailBeli = $detailBeliModel->where('notransaksi', $notransaksi)->first();
 
                     if ($detailBeli) {
                         // Menghitung totalrp dari detail beli yang memiliki notransaksi yang sama dan isLunas = 'N'
-                        $totalrp = $detailBeliModel->selectSum('totalrp')->where('notransaksi', $notransaksi)->where('islunas', 'N')->first();
+                        // $totalrp = $detailBeliModel->selectSum('totalrp')->where('notransaksi', $notransaksi)->where('islunas', 'N')->first();
+                        $totalrp = $detailBeliModel->selectSum('totalrp')->where('notransaksi', $notransaksi)->first();
 
                         $hutangModel->insert([
                             'notransaksi' => $notransaksi,
                             'kodespl' => $kodespl,
                             'tglbeli' => $tglbeli,
-                            'totalhutang' => $totalrp['totalrp'], // Ambil nilai totalrp dari hasil query
+                            'totalhutang' => $totalrp['totalrp'],
+                            'islunas' => rand(0, 1) ? 'Y' : 'N',
                         ]);
                     } else {
                         // Handle jika tidak ada detail beli yang sesuai

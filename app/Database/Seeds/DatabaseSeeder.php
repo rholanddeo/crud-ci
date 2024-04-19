@@ -11,6 +11,6 @@ class DatabaseSeeder extends Seeder
         // menjalankan semua seeder
         $this->call('BarangSeeder');
         $this->call('SuplierSeeder');
-        $this->call('TransaksiSeeder');
+        // $this->call('TransaksiSeeder');
     }
 }

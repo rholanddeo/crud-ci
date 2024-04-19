@@ -62,7 +62,7 @@
                         <!-- <a href="<?php echo base_url('suplier-edit-' . $item['id']) ?>" class="btn btn-sm btn-warning w-100 w-sm-auto">
                             <i class="bi-pencil mr-1"></i> EDIT
                         </a> -->
-                        <a href="<?php echo base_url('hutang/delete/' . $item['id']) ?>" class="btn btn-sm btn-danger w-100 w-sm-auto">
+                        <a href="<?php echo base_url('hutang-delete-' . $item['id']) ?>" class="btn btn-sm btn-danger w-100 w-sm-auto">
                             <i class="bi-trash mr-1"></i> DELETE
                         </a>
                     </td>

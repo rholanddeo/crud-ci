@@ -29,7 +29,7 @@
     <?php } ?>
     <div class="card">
         <div class="card-body">
-            <form action="<?= isset($transaksi) ? base_url('transaksi/update/' . $transaksi['id']) : base_url('transaksi-store'); ?>" method="POST">
+            <form action="<?= isset($transaksi) ? base_url('transaksi-update-' . $transaksi['id']) : base_url('transaksi-store'); ?>" method="POST">
                 <!-- csrf -->
                 <?= csrf_field() ?>
                 <div class="form-group mb-3">
@@ -41,7 +41,7 @@
             "hidePlaceholderOnSearch": true,
             "placeholder": "Cari Suplier..."
           }'>
-                            <option value="" disabled <?php if (!$suplier) echo 'selected'; ?>>Pilih Supplier</option>
+                            <option value="" disabled selected>Pilih Supplier</option>
                             <?php foreach ($suplier as $row) : ?>
                                 <option value="<?= $row['kodespl'] ?>" <?php if (isset($transaksi) && $transaksi['kodespl'] == $row['kodespl']) echo 'selected'; ?>>
                                     <?= $row['kodespl'] ?> - <?= $row['namaspl'] ?>
@@ -65,7 +65,7 @@
                             <i class="bi-calendar-week"></i>
                         </div>
 
-                        <input type="text" name="tglbeli" class="flatpickr-custom-form-control form-control" id="projectDeadlineFlatpickrNewProjectLabel" placeholder="Select dates" data-input value="<?= isset($transaksi['tglbeli']) ? $transaksi['tglbeli'] : '' ?>">
+                        <input type="text" name="tglbeli" class="flatpickr-custom-form-control form-control" id="projectDeadlineFlatpickrNewProjectLabel" placeholder="Select dates" data-input value="<?= isset($transaksi['tglbeli']) ? date('d-m-Y', strtotime($transaksi['tglbeli'])) : "" ?>">
 
                     </div>
                 </div>
