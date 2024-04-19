@@ -41,3 +41,4 @@ $routes->post('/transaksi-detail-update-(:num)', 'TransaksiController::updateDet
 $routes->get('/transaksi-detail-delete-(:num)', 'TransaksiController::deleteDetail/$1');
 
 $routes->get('/hutang', 'TransaksiController::hutang');
+$routes->post('/hutang/islunas', 'TransaksiController::islunas');

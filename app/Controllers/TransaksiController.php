@@ -29,8 +29,10 @@ class TransaksiController extends BaseController
         $hutangModel = new Hutang();
 
         $data = [
-            'hutang' => $hutangModel->findAll(),
-            'pager' => $hutangModel->pager,
+            'hutang' => $hutangModel->where('islunas', 'N')
+            ->join('tbl_hbeli', 'tbl_hbeli.notransaksi = tbl_hutang.notransaksi')
+            ->select('tbl_hutang.*, tbl_hbeli.id as id_headerbeli')
+            ->orderBy('created_at', 'DESC')->findAll(),
         ];
 
         return view('transaksi/hutang', $data);
@@ -176,7 +178,6 @@ class TransaksiController extends BaseController
             session()->setFlashdata('message', 'Data Barang Berhasil Diubah');
 
             return redirect()->to(base_url('transaksi'));
-
         }
     }
 
@@ -289,7 +290,7 @@ class TransaksiController extends BaseController
                     'qtybeli' => $existingStock['qtybeli'] + $this->request->getPost('qty'),
                 ]);
             }
-            
+
             //menambahkan hutang
             $hutangModel = new Hutang();
             $existingHutang = $hutangModel->where('notransaksi', $headerBeli['notransaksi'])->first();
@@ -306,6 +307,7 @@ class TransaksiController extends BaseController
                     'id' => $existingHutang['id'],
                     'notransaksi' => $headerBeli['notransaksi'],
                     'kodespl' => $headerBeli['kodespl'],
+                    'tglbeli' => $headerBeli['tglbeli'],
                     'totalhutang' => $existingHutang['totalhutang'] + $totalrp,
                 ]);
             }
@@ -332,27 +334,27 @@ class TransaksiController extends BaseController
         return redirect()->to(base_url('transaksi-detail-' . $headerBeli['id']));
     }
 
-    public function islunasswitch($id)
+    public function islunas()
     {
         $hutangModel = new Hutang();
+        $id = $this->request->getPost('id');
         $hutang = $hutangModel->find($id);
         $headerBeliModel = new HeaderBeli();
         $headerBeli = $headerBeliModel->where('notransaksi', $hutang['notransaksi'])->first();
 
-        $hutang['islunas'] = $this->request->getPost('islunas');
- 
-        if ($hutang['islunas'] == 0) {
-            $hutangModel->save([
-                'id' => $id,
-                'islunas' => 1,
-            ]);
-        } else {
-            $hutangModel->save([
-                'id' => $id,
-                'islunas' => 0,
-            ]);
-        }
+        $newStatus = $this->request->getPost('islunas') === 'Y' ? 'Y' : 'N';
 
-        return redirect()->to(base_url('transaksi-detail-' . $headerBeli['id']));
+        $hutangModel->save([
+            'id' => $id,
+            'islunas' => $newStatus,
+        ]);
+
+        $response = [
+            'success' => true,
+            'isLunas' => $newStatus === 'Y',
+            'totalHutangFormatted' => number_format($hutang['totalhutang'], 0, ',', '.')
+        ];
+
+        return $this->response->setJSON($response);
     }
 }

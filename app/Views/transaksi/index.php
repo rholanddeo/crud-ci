@@ -118,10 +118,10 @@
 
               <td class="d-flex flew-wrap gap-2">
                 <a href="<?php echo base_url('transaksi-detail-' . $item['id']) ?>" class="btn btn-sm btn-success w-100 w-sm-auto">
-                  <i class="bi-eye mr-1"></i> DETAIL
+                  <i class="bi-eye me-2"></i>DETAIL
                 </a>
                 <a href="<?php echo base_url('transaksi-delete-' . $item['id']) ?>" class="btn btn-sm btn-danger w-100 w-sm-auto">
-                  <i class="bi-trash mr-1"></i> DELETE
+                  <i class="bi-trash me-2"></i>DELETE
                 </a>
               </td>
             </tr>

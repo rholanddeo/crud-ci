@@ -138,7 +138,7 @@
             <!-- tambah barang -->
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-              <i class="bi-plus-lg me-1"></i> Tambah Barang
+              <i class="bi-plus-lg me-2"></i>Tambah Barang
             </button>
             <!-- End Button trigger modal -->
 
@@ -161,24 +161,24 @@
                       <?php } ?>
 
 
-    
-          <label class="form-label fw-semibold">KODE SUPLIER</label>
-          <!-- Select -->
-          <div class="tom-select-custom">
-            <select class="js-select form-select" name="kodebrg" autocomplete="off" data-hs-tom-select-options='{
+
+                      <label class="form-label fw-semibold">KODE SUPLIER</label>
+                      <!-- Select -->
+                      <div class="tom-select-custom">
+                        <select class="js-select form-select" name="kodebrg" autocomplete="off" data-hs-tom-select-options='{
             "searchInDropdown": false,
             "hidePlaceholderOnSearch": true,
             "placeholder": "Cari barang..."
           }'>
-              <option value="" disabled selected>Pilih Supplier</option>
-              <?php foreach ($barang as $row) : ?>
-                <option value="<?= $row['kodebrg'] ?>">
-                  <?= $row['kodebrg'] ?> - <?= $row['namabrg'] ?>
-                </option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-          <!-- End Select -->
+                          <option value="" disabled selected>Pilih Supplier</option>
+                          <?php foreach ($barang as $row) : ?>
+                            <option value="<?= $row['kodebrg'] ?>">
+                              <?= $row['kodebrg'] ?> - <?= $row['namabrg'] ?>
+                            </option>
+                          <?php endforeach; ?>
+                        </select>
+                      </div>
+                      <!-- End Select -->
                       <div class="form-grup mb-3">
                         <label class="form-label" for="qty">Qty</label>
                         <input type="number" id="qty" name="qty" class="form-control" placeholder="00">
@@ -248,7 +248,7 @@
 
               <td class="d-flex flew-wrap gap-2">
                 <a href="<?php echo base_url('transaksi-detail-delete-' . $item['id']) ?>" class="btn btn-sm btn-danger w-100 w-sm-auto">
-                  <i class="bi-trash mr-1"></i> DELETE
+                  <i class="bi-trash me-2"></i>DELETE
                 </a>
               </td>
             </tr>
@@ -309,36 +309,65 @@
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-body">
-      <div class="d-flex justify-content-between align-items-center">
-        <div class="form-check form-switch">
-          <!-- <input type="checkbox" class="form-check-input is-valid" name="" id="validSwitch" checked>
-          <label class="form-check-valid">switch lunas</label> -->
-          <form action="" method="POST">
-            <input type="hidden" name="islunas" value="N">
-            <input type="checkbox" name="islunas" value="N" class="form-check-input is-valid" id="islunas" <?php echo $hutang['islunas'] == 'Y' ? 'checked' : '' ?>>
-          </form>
+  <?php if (isset($hutang)) : ?>
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="form-check form-switch">
+            <form id="statusForm">
+              <?= csrf_field() ?>
+              <input type="hidden" name="id" value="<?= $hutang['id'] ?>">
+              <input type="hidden" name="islunas_default" value="<?= $hutang['islunas'] ?>">
+              <input type="checkbox" name="islunas" value="Y" class="form-check-input is-valid" id="islunas" <?= $hutang['islunas'] == 'Y' ? 'checked' : '' ?>>
+            </form>
+
+          </div>
+          <div id="statusContainer" class="d-flex align-items-center">
+            <?php if ($hutang['islunas'] == 'Y') : ?>
+              <span class="me-2">Total Hutang:</span><span class="text-success"><span class="badge bg-soft-success text-success">Lunas</span></span>
+            <?php else : ?>
+              <span class="me-2">Total Hutang:</span>
+              <span id="totalHutang" class="text-danger">Rp. <?= number_format($hutang['totalhutang'], 0, ',', '.') ?></span>
+            <?php endif; ?>
+          </div>
 
           <script>
-            const isLunas = document.getElementById('islunas');
-            isLunas.addEventListener('change', function() {
-              if (this.checked) {
-                this.previousElementSibling.value = 'Y';
-              } else {
-                this.previousElementSibling.value = 'N';
-              }
-              this.closest('form').submit();
+            const isLunasCheckbox = document.getElementById('islunas');
+
+            isLunasCheckbox.addEventListener('change', function() {
+              const form = new FormData(document.getElementById('statusForm'));
+              updateStatus(form);
             });
+
+            function updateStatus(formData) {
+              fetch('<?= base_url('hutang/islunas') ?>', {
+                  method: 'POST',
+                  body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                  if (data.success) {
+                    // Perbarui tampilan status
+                    const statusContainer = document.getElementById('statusContainer');
+                    if (data.isLunas) {
+                      statusContainer.innerHTML = '<span class="me-2">Total Hutang:</span><span class="text-success"><span class="badge bg-soft-success text-success">Lunas</span></span>';
+                    } else {
+                      statusContainer.innerHTML = '<span class="me-2">Total Hutang:</span><span class="text-danger">Rp. ' + data.totalHutangFormatted + '</span>';
+                    }
+                  } else {
+                    console.error('Gagal memperbarui status.');
+                  }
+                })
+                .catch(error => {
+                  console.error('Terjadi kesalahan:', error);
+                });
+            }
           </script>
 
-        </div>
-        <div class="d-flex align-items-center">
-          <span class="me-2">Total Hutang:</span>
-          <span class="text-danger">Rp. <?php echo isset($hutang) && $hutang['islunas'] == 'N' ? number_format($hutang['totalhutang'], 0, ',', '.') : 0 ?></span>
+
         </div>
       </div>
     </div>
-  </div>
+  <?php endif; ?>
 
   <?= $this->endSection('content') ?>

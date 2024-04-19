@@ -112,10 +112,10 @@ me-1"></i> Tambah Suplier
 
               <td class="d-flex flew-wrap gap-2">
                 <a href="<?php echo base_url('suplier-edit-' . $item['id']) ?>" class="btn btn-sm btn-warning w-100 w-sm-auto">
-                  <i class="bi-pencil mr-1"></i> EDIT
+                  <i class="bi-pencil me-2"></i>EDIT
                 </a>
                 <a href="<?php echo base_url('suplier-delete-' . $item['id']) ?>" class="btn btn-sm btn-danger w-100 w-sm-auto">
-                  <i class="bi-trash mr-1"></i> DELETE
+                  <i class="bi-trash me-2"></i>DELETE
                 </a>
               </td>
             </tr>

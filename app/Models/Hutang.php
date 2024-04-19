@@ -49,4 +49,10 @@ class Hutang extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    // relasi
+    public function transaksi()
+    {
+        return $this->belongsTo(HeaderBeli::class, 'notransaksi')->pluck('id');
+    }
 }
