@@ -12,10 +12,10 @@ class BarangController extends BaseController
     public function index()
     {
         $barangModel = new Barang();
-        // $pager = \Config\Services::pager();
+        
         $barangData = $barangModel->select('tbl_barang.*, tbl_stock.qtybeli')
                              ->join('tbl_stock', 'tbl_stock.kodebrg = tbl_barang.kodebrg', 'left')
-                             ->paginate(10);
+                             ->findAll();
 
         $data = [
             'barang' => $barangData,
@@ -74,14 +74,7 @@ class BarangController extends BaseController
 
              //model initialize
             $barangModel = new Barang();
-            
-            //insert data into database
-            // $barangModel->insert([
-            //     'codebrg' => $this->request->getPost('kodebrg'),
-            //     'namabrg' => $this->request->getPost('namabrg'),
-            //     'satuan' => $this->request->getPost('satuan'),
-            //     'hargabeli' => $this->request->getPost('hargabeli'),
-            // ]);
+    
 
             $barangModel->insert([
                 'kodebrg' => $this->request->getPost('kodebrg'),

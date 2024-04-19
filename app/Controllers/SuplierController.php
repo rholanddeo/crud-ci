@@ -11,10 +11,10 @@ class SuplierController extends BaseController
     public function index()
     {
         $suplierModel = new Suplier();
-        // $pager = \Config\Services::pager();
+        $pager = \Config\Services::pager();
 
         $data = [
-            'suplier' => $suplierModel->paginate(10),
+            'suplier' => $suplierModel->findAll(),
             'pager' => $suplierModel->pager,
         ];
 

@@ -26,7 +26,11 @@ class HeaderBeli extends Migration
             'tglbeli'       => [
                 'type'           => 'DATE',
             ],
+            'created_at DATETIME DEFAULT CURRENT_TIMESTAMP',
+            'updated_at DATETIME DEFAULT CURRENT_TIMESTAMP',
+            'deleted_at DATETIME DEFAULT NULL',
         ]);
+        //timestamp
         $this->forge->addKey('id', true);
         $this->forge->createTable('tbl_hbeli');
 

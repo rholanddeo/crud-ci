@@ -20,6 +20,8 @@
 
     <link rel="stylesheet" href="./assets/vendor/daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="./assets/vendor/tom-select/dist/css/tom-select.bootstrap5.css">
+    <link rel="stylesheet" href="./assets/vendor/flatpickr/dist/flatpickr.min.css">
+
 
     <!-- CSS Front Template -->
 
@@ -501,14 +503,14 @@
 
                         <!-- Collapse -->
                         <div class="nav-item">
-                            <a class="nav-link dropdown-toggle <?php if (strpos(current_url(), 'transaksi') !== false) echo 'active'; ?>" href="#navbarVerticalMenuDashboards" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards" aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
+                            <a class="nav-link dropdown-toggle <?php if (strpos(current_url(), 'transaksi') !== false || strpos(current_url(), 'hutang')  !== false) echo 'active'; ?>" href="#navbarVerticalMenuDashboards" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards" aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
                                 <i class="bi-house-door nav-icon"></i>
                                 <span class="nav-link-title">Pembelian</span>
                             </a>
 
-                            <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse <?php if (strpos(current_url(), 'transaksi') !== false) echo 'show'; ?>" data-bs-parent="#navbarVerticalMenu">
+                            <div id="navbarVerticalMenuDashboards" class="nav-collapse collapse <?php if (strpos(current_url(), 'transaksi') !== false || strpos(current_url(), 'hutang')  !== false) echo 'show'; ?>" data-bs-parent="#navbarVerticalMenu">
                                 <a class="nav-link <?php if (strpos(current_url(), 'transaksi') !== false) echo 'active'; ?>" href="<?php echo base_url('transaksi') ?>">Transaksi</a>
-                                <a class="nav-link <?php if (strpos(current_url(), 'transaksi') !== false) echo 'active'; ?>" href="<?php echo base_url('transaksi') ?>">Hutang</a>
+                                <a class="nav-link <?php if (strpos(current_url(), 'hutang') !== false) echo 'active'; ?>" href="<?php echo base_url('hutang') ?>">Hutang</a>
                             </div>
                         </div>
 
@@ -595,6 +597,7 @@
     <!-- JS Implementing Plugins -->
     <script src="./assets/vendor/hs-navbar-vertical-aside/dist/hs-navbar-vertical-aside.min.js"></script>
     <script src="./assets/vendor/hs-form-search/dist/hs-form-search.min.js"></script>
+    <script src="./assets/vendor/hs-step-form/dist/hs-step-form.min.js"></script>
 
     <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="./assets/vendor/chartjs-chart-matrix/dist/chartjs-chart-matrix.min.js"></script>
@@ -605,12 +608,43 @@
     <script src="./assets/vendor/clipboard/dist/clipboard.min.js"></script>
     <script src="./assets/vendor/datatables/media/js/jquery.dataTables.min.js"></script>
     <script src="./assets/vendor/datatables.net.extensions/select/select.min.js"></script>
+    <script src="./assets/vendor/flatpickr/dist/flatpickr.min.js"></script>
 
     <!-- JS Front -->
     <script src="./assets/js/theme.min.js"></script>
     <script src="./assets/js/hs.theme-appearance-charts.js"></script>
 
     <!-- JS Plugins Init. -->
+    <script>
+  (function() {
+    // INITIALIZATION OF STEP FORM
+    // =======================================================
+    new HSStepForm('.js-step-form', {
+      finish ($el) {
+        const $successMessageTempalte = $el.querySelector('.js-success-message').cloneNode(true)
+
+        $successMessageTempalte.style.display = 'block'
+
+        $el.style.display = 'none'
+        $el.parentElement.appendChild($successMessageTempalte)
+      }
+    })
+  })();
+</script>
+    <script>
+        (function() {
+            // INITIALIZATION OF SELECT
+            // =======================================================
+            HSCore.components.HSTomSelect.init('.js-select')
+        })();
+    </script>
+    <script>
+  (function() {
+    // INITIALIZATION OF FLATPICKR
+    // =======================================================
+    HSCore.components.HSFlatpickr.init('.js-flatpickr')
+  })();
+</script>
     <script>
         $(document).on('ready', function() {
             // INITIALIZATION OF DATERANGEPICKER
@@ -834,6 +868,8 @@
             }
         })()
     </script>
+
+
 
     <!-- Style Switcher JS -->
 

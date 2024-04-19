@@ -30,4 +30,6 @@ $routes->get('/suplier/delete/(:num)', 'SuplierController::delete/$1');
 
 $routes->get('/transaksi', 'TransaksiController::index');
 $routes->get('/transaksi-create', 'TransaksiController::create');
-$routes->post('/transaksi/store', 'TransaksiController::store');
+$routes->post('/transaksi-store', 'TransaksiController::store');
+
+$routes->get('/hutang', 'TransaksiController::hutang');
