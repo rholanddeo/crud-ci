@@ -361,7 +361,7 @@
               <td><?php echo $item['tglbeli'] ?></td>
 
               <td class="d-flex flew-wrap gap-2">
-                <a href="<?php echo base_url('transaksi-detail-' . $item['id']) ?>" class="btn btn-sm btn-info w-100 w-sm-auto">
+                <a href="<?php echo base_url('transaksi-detail-' . $item['id']) ?>" class="btn btn-sm btn-secondary w-100 w-sm-auto">
                   <i class="bi-eye me-2"></i>DETAIL
                 </a>
               </td>
