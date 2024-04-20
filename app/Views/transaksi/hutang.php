@@ -72,8 +72,8 @@
     <!-- End Header -->
 
     <!-- Table -->
-    <div class="table-responsive datatable-custom">
-      <table class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+    <div class="table-responsive datatable-custom p-4">
+      <table class="js-datatable table table-nowrap table-align-middle card-table" data-hs-datatables-options='{
                    "order": [],
                    "info": {
                      "totalQty": "#datatableEntriesInfoTotalQty"
@@ -108,7 +108,7 @@
 
 <?php
 ?>
-                <a href="<?php echo base_url('transaksi-detail-' . $item['id_headerbeli']) ?>" class="btn btn-sm btn-success w-100 w-sm-auto">
+                <a href="<?php echo base_url('transaksi-detail-' . $item['id_headerbeli']) ?>" class="btn btn-sm btn-info w-100 w-sm-auto">
                   <i class="bi-eye me-2"></i>DETAIL
                 </a>
               </td>

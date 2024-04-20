@@ -27,11 +27,13 @@
           <!-- Card -->
           <a class="card card-hover-shadow h-100" href="#">
             <div class="card-body">
-              <h6 class="card-subtitle">Total Users</h6>
+              <h6 class="card-subtitle">Total Stok Barang</h6>
 
               <div class="row align-items-center gx-2 mb-1">
                 <div class="col-6">
-                  <h2 class="card-title text-inherit">72,540</h2>
+                  <h2 class="card-title text-inherit">
+                    <?php echo $totalStock; ?>
+                  </h2>
                 </div>
                 <!-- End Col -->
 
@@ -94,11 +96,13 @@
           <!-- Card -->
           <a class="card card-hover-shadow h-100" href="#">
             <div class="card-body">
-              <h6 class="card-subtitle">Sessions</h6>
+              <h6 class="card-subtitle">Total Suplier</h6>
 
               <div class="row align-items-center gx-2 mb-1">
                 <div class="col-6">
-                  <h2 class="card-title text-inherit">29.4%</h2>
+                  <h2 class="card-title text-inherit">
+                    <?php echo $totalSuplier; ?>
+                  </h2>
                 </div>
                 <!-- End Col -->
 
@@ -161,11 +165,13 @@
           <!-- Card -->
           <a class="card card-hover-shadow h-100" href="#">
             <div class="card-body">
-              <h6 class="card-subtitle">Avg. Click Rate</h6>
+              <h6 class="card-subtitle">Total Transaksi</h6>
 
               <div class="row align-items-center gx-2 mb-1">
                 <div class="col-6">
-                  <h2 class="card-title text-inherit">56.8%</h2>
+                  <h2 class="card-title text-inherit">
+                    <?php echo $totalTransaksi; ?>
+                  </h2>
                 </div>
                 <!-- End Col -->
 
@@ -228,11 +234,13 @@
           <!-- Card -->
           <a class="card card-hover-shadow h-100" href="#">
             <div class="card-body">
-              <h6 class="card-subtitle">Pageviews</h6>
+              <h6 class="card-subtitle">Total Hutang</h6>
 
               <div class="row align-items-center gx-2 mb-1">
                 <div class="col-6">
-                  <h2 class="card-title text-inherit">92,913</h2>
+                  <h2 class="card-title text-inherit">
+                    <?php echo $totalHutang; ?>
+                  </h2>
                 </div>
                 <!-- End Col -->
 
@@ -290,5 +298,122 @@
         </div>
       </div>
       <!-- End Stats -->
+
+      <div class="card">
+    <!-- Header -->
+    <div class="card-header">
+      <div class="row justify-content-between align-items-center flex-grow-1-reverse">
+        <div class="col-12 col-md">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-header-title">Transaksi Terbaru</h5>
+          </div>
+        </div>
+        <div class="col-auto">
+          <!-- Filter -->
+          <form>
+            <!-- Search -->
+            <div class="input-group input-group-merge input-group-flush">
+              <div class="input-group-prepend input-group-text">
+                <i class="bi-search"></i>
+              </div>
+              <input id="datatableWithSearchInput" type="search" class="form-control" placeholder="Cari transaksi..." aria-label="Search users">
+            </div>
+            <!-- End Search -->
+          </form>
+          <!-- End Filter -->
+        </div>
+
+
+      </div>
+    </div>
+    <!-- End Header -->
+
+    <!-- Table -->
+    <div class="table-responsive datatable-custom p-4">
+      <table class="js-datatable table table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+                   "order": [],
+                   "info": {
+                     "totalQty": "#datatableEntriesInfoTotalQty"
+                   },
+                   "entries": "#datatableEntries",
+                   "search": "#datatableWithSearchInput",
+                   "isResponsive": false,
+                   "isShowPaging": false,
+                   "pagination": "datatableEntriesPagination"
+                 }'>
+        <thead class="thead-light">
+          <tr>
+            <th>NOMOR TRANSAKSI</th>
+            <th>KODE SUPLIER</th>
+            <th>TANGGAL BELI</th>
+            <th>AKSI</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- perulangan data barang -->
+
+          <?php foreach ($transaksi as $key => $item) : ?>
+
+            <tr>
+              <td><?php echo $item['notransaksi'] ?></td>
+              <td><?php echo $item['kodespl'] ?></td>
+              <td><?php echo $item['tglbeli'] ?></td>
+
+              <td class="d-flex flew-wrap gap-2">
+                <a href="<?php echo base_url('transaksi-detail-' . $item['id']) ?>" class="btn btn-sm btn-info w-100 w-sm-auto">
+                  <i class="bi-eye me-2"></i>DETAIL
+                </a>
+              </td>
+            </tr>
+          <?php endforeach ?>
+        </tbody>
+      </table>
+    </div>
+    <!-- End Table -->
+
+    <div class="card-footer">
+      <!-- Pagination -->
+      <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+        <div class="col-sm mb-2 mb-sm-0">
+          <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+            <span class="me-2">Showing:</span>
+
+            <!-- Select -->
+            <div class="tom-select-custom">
+              <select id="datatableEntries" class="js-select form-select form-select-borderless w-auto" autocomplete="off" data-hs-tom-select-options='{
+                "searchInDropdown": false,
+                "hideSearch": true
+              }'>
+                <option value="4">4</option>
+                <option value="6">6</option>
+                <option value="8" selected>8</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <!-- End Select -->
+
+            <span class="text-secondary me-2">of</span>
+
+            <!-- Pagination Quantity -->
+            <span id="datatableEntriesInfoTotalQty"></span>
+          </div>
+        </div>
+
+       
+
+
+
+        <div class="col-sm-auto">
+          <div class="d-flex justify-content-center justify-content-sm-end">
+            <!-- Pagination -->
+            <nav id="datatableEntriesPagination" aria-label="Activity pagination"></nav>
+          </div>
+        </div>
+      </div>
+      <!-- End Pagination -->
+    </div>
+    <!-- End Footer -->
+  </div>
     </div>
 <?= $this->endSection() ?>

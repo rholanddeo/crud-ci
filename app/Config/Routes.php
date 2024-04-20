@@ -13,6 +13,7 @@ $routes->get('/', function ()
     return view('login');
 });
 
+$routes->get('/home', [Home::class, 'index']);
 
 $routes->get('/barang', [BarangController::class, 'index']);
 $routes->get('/barang-create',  'BarangController::create');

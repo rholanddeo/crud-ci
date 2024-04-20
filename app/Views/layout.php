@@ -485,6 +485,13 @@
                         <small class="bi-three-dots nav-subtitle-replacer"></small>
 
                         <div class="nav-item">
+                            <a class="nav-link <?php if (strpos(current_url(), 'home') !== false) echo 'active'; ?>" data-placement="left" href="<?php echo base_url('home') ?>">
+                                <i class="bi-house nav-icon"></i>
+                                <span class="nav-link-title">Dashboard</span>
+                            </a>
+                        </div>
+
+                        <div class="nav-item">
                             <a class="nav-link <?php if (strpos(current_url(), 'barang') !== false) echo 'active'; ?>" data-placement="left" href="<?php echo base_url('barang') ?>">
                                 <i class=" bi-kanban nav-icon"></i>
                                 <span class="nav-link-title">
@@ -504,7 +511,7 @@
                         <!-- Collapse -->
                         <div class="nav-item">
                             <a class="nav-link dropdown-toggle <?php if (strpos(current_url(), 'transaksi') !== false || strpos(current_url(), 'hutang')  !== false) echo 'active'; ?>" href="#navbarVerticalMenuDashboards" role="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalMenuDashboards" aria-expanded="true" aria-controls="navbarVerticalMenuDashboards">
-                                <i class="bi-house-door nav-icon"></i>
+                                <i class="bi-basket nav-icon"></i>
                                 <span class="nav-link-title">Pembelian</span>
                             </a>
 

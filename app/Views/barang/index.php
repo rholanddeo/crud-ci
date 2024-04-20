@@ -80,8 +80,8 @@
     <!-- End Header -->
 
     <!-- Table -->
-    <div class="table-responsive datatable-custom">
-      <table class="js-datatable table table-borderless table-thead-bordered table-nowrap table-align-middle card-table" data-hs-datatables-options='{
+    <div class="table-responsive datatable-custom p-4">
+      <table class="js-datatable table table-nowrap table-align-middle card-table" data-hs-datatables-options='{
                    "order": [],
                    "info": {
                      "totalQty": "#datatableEntriesInfoTotalQty"
