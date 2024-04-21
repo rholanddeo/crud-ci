@@ -31,7 +31,7 @@
 #--------------------------------------------------------------------
 
 # database.default.hostname = localhost
-# database.default.database = db_crud_ci
+# database.default.database = db_ci_crud
 # database.default.username = root
 # database.default.password = 
 # database.default.DBDriver = MySQLi
